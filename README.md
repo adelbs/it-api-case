@@ -129,6 +129,15 @@ Remove uma categoria, de acordo com o id passado
 * 404: se não encontrar o id
 * 200: se a remoção deu certo
 ---
+### [UPDATE] /api/v1/categoria/:id
+
+Atualiza a categoria, de acordo com o id passado
+
+**Responses:**
+
+* 422: se não encontrar a categoria com id
+* 200: se a atualização deu certo
+---
 ### [POST] /api/v1/lancamento
 
 Cria um novo lançamento
@@ -224,3 +233,11 @@ Remove um lançamento, de acordo com o id passado
 * 404: se não encontrar o id
 * 200: se a remoção deu certo
 ---
+### [UPDATE] /api/v1/lancamento/:id
+
+Atualiza um lançamento, de acordo com o id passado
+
+**Responses:**
+
+* 422: se não encontrar um lançamento
+* 200: se a atualização deu certo
