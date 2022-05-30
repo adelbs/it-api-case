@@ -38,9 +38,23 @@ router.delete('/:id', async (req, res) => {
     res.status(i > -1 ? 200 : 404).send();
 });
 
+router.put('/:id', async (req, res) => {
+    const categorias = db.read('categorias') || [];
+    const categoriaIndex = categorias.findIndex(item => item.id == req.params.id);
+    const { name } = req.body;
+
+    if (categoriaIndex === -1) {
+        return res.status(422).json({message: 'Category is not found'});
+    }
+
+    categorias[categoriaIndex] = {...categorias[categoriaIndex], name};
+    db.write('categorias', categorias);
+    return res.status(200).send(categorias[categoriaIndex]);
+});
+
 router.get('', async (req, res) => {
     const categorias = db.read('categorias') || [];
-    res.send(categorias);
+    return res.send(categorias);
 });
 
 module.exports = router;

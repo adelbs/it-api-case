@@ -50,6 +50,19 @@ router.delete('/:id', async (req, res) => {
     res.status(i > -1 ? 200 : 404).send('');
 });
 
+router.put('/:id', async (req, res) => {
+    const lancamentos = db.read('lancamentos') || [];
+    const lancamentoIndex = lancamentos.findIndex(item => item.id == req.params.id);
+
+    if (lancamentoIndex === -1) {
+        return res.status(422).json({message: 'Expense is not found'});
+    }
+
+    lancamentos[lancamentoIndex] = {...lancamentos[lancamentoIndex], ...req.body};
+    db.write('lancamentos', lancamentos);
+    return res.status(200).send(lancamentos[lancamentoIndex]);
+});
+
 router.get('', async (req, res) => {
     const lancamentos = db.read('lancamentos') || [];
     res.send(lancamentos);
